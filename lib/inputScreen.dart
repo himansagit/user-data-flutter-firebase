@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutterfirebaseapp/showUsers.dart';
 // import 'package:firebase_core/firebase_core.dart';
-import 'package:image_picker/image_picker.dart';
+// import 'package:image_picker/image_picker.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
@@ -28,8 +28,8 @@ class _InputScreenState extends State<InputScreen> {
 
   List fields = [];
   Map userData = new Map();
-  String? _fileName = null;
-  String? _filePath = null;
+  // String? _fileName ;
+  String? _filePath;
 
   void setUserField(String Key, String? Value) {
     userData[Key] = Value;
@@ -77,14 +77,13 @@ class _InputScreenState extends State<InputScreen> {
         labelText: '${doc['label']}',
       ),
       validator: (value) {
-        if (value != null && value!.trim().isEmpty) {
-          print('validate');
+        if (value != null && value.trim().isEmpty) {
+          //print('validate');
           return '${doc['label']} is required';
         }
       },
       onSaved: (newValue) {
         setUserField('${doc['label']}', newValue);
-        // print(newValue);
       },
     );
   }
@@ -124,7 +123,6 @@ class _InputScreenState extends State<InputScreen> {
             ),
             ElevatedButton(
                 onPressed: () async {
-                  // final result= await ImagePicker.platform.pickImage(source: ImageSource.gallery,
                   final results = await FilePicker.platform.pickFiles(
                     allowMultiple: false,
                     type: FileType.custom,
@@ -136,14 +134,12 @@ class _InputScreenState extends State<InputScreen> {
                   if (results == null) {
                     ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text('no file selelcted')));
-                    return null;
+                    // return null;
                   }
                   final filePath = results!.files.single.path;
                   final fileName = results.files.single.name;
-                  _fileName = fileName;
+
                   _filePath = filePath;
-                  print(filePath);
-                  print(fileName);
                 },
                 child: const Text('Upload Image')),
             ElevatedButton(

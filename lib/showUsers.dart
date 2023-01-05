@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-// import 'database.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'package:flutterfirebaseapp/inputScreen.dart';
-// import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
 class Users extends StatefulWidget {
@@ -39,38 +36,14 @@ class _UsersState extends State<Users> {
           children: [
             ListTile(
               leading: Image.network('${e['imagePath']}'),
-              title: Text('${e['Name']}'),
+              title: Text('${e['Email']}'),
               subtitle: Text('${e['Info']}'),
             ),
-            Padding(padding: EdgeInsets.all(10), child: Text('${e['Email']}')),
+            Padding(padding: EdgeInsets.all(10), child: Text('${e['Name']}')),
           ],
         ),
       ),
     );
-    // if (k == 'imagePath') {
-    //       print('image path $v');
-
-    //       userWidget.add(Image.network(
-    //         '$v',
-    //         key: UniqueKey(),
-    //       ));
-    //       // print(URL);
-    //       // userWidget.add(Container(
-    //       //   width: 300,
-    //       //   height: 250,
-    //       //   child: Image.network(URL!, fit: BoxFit.cover),
-    //       // ));
-
-    //       print(userWidget);
-    //     } else {
-    //       userWidget.add(Text(
-    //         '$v',
-    //         style: TextStyle(fontSize: 20.0),
-    //       ));
-    //       userWidget.add(SizedBox(
-    //         height: 10,
-    //       ));
-    //     }
   }
 
   @override
@@ -90,18 +63,6 @@ class _UsersState extends State<Users> {
         child: Column(
           children: users.map((e) {
             return getUserCard(e);
-            // List<Widget> userWidget = [];
-
-            // e.forEach((k, v) {
-            //   userWidget.add(getUserCard(k, v));
-            // });
-            // userWidget.add(Image.network('https://picsum.photos/200/300'));
-            // return Center(
-            //   child: Column(
-            //     crossAxisAlignment: CrossAxisAlignment.center,
-            //     children: userWidget,
-            //   ),
-            // );
           }).toList(),
         ),
       ),
@@ -114,23 +75,3 @@ class _UsersState extends State<Users> {
     );
   }
 }
-
-// class UserCard extends StatelessWidget {
-//   final Map data;
-//   const UserCard({this.data});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Center(
-//       child: Card(
-//           child: Column(
-//         mainAxisSize: MainAxisSize.min,
-//         children: <Widget>[
-//           Text("name"),
-//           SizedBox(height: 20.0),
-//           Text("email"),
-//         ],
-//       )),
-//     );
-//   }
-// }
